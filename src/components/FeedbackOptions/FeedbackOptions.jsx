@@ -1,13 +1,15 @@
+import { Button, Container } from './FeedbackOptions.styled';
+
 export const FeedbackOptions = ({ onLeaveFeedback, options }) => {
   return (
-    <div>
+    <Container>
       {options.map(option => {
         return (
-          <button onClick={onLeaveFeedback} key={option}>
+          <Button onClick={onLeaveFeedback} key={option}>
             {option}
-          </button>
+          </Button>
         );
       })}
-    </div>
+    </Container>
   );
 };

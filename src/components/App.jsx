@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Section } from './Section/Section';
-
+import { GlobalStyle } from './GlobalStyled';
+import { Container } from './App.styled';
 export class App extends Component {
   state = {
     good: 0,
@@ -32,18 +33,19 @@ export class App extends Component {
     const total = this.countTotalFeedback();
     const countPositiveFeedback = this.countPositiveFeedbackPercentage();
     return (
-      <div>
+      <Container>
         <Section
           title="Please leave feedback"
           onLeaveFeedback={this.onLeaveFeedback}
-        ></Section>
+        />
         <Section
           title="Statistics"
           state={this.state}
           total={total}
           countPositiveFeedback={countPositiveFeedback}
-        ></Section>
-      </div>
+        />
+        <GlobalStyle />
+      </Container>
     );
   }
 }

@@ -1,5 +1,6 @@
 import { FeedbackOptions } from '../FeedbackOptions/FeedbackOptions';
 import { Statistics } from '../Statistics/Statistics';
+import { Container, Title } from './Section.styled';
 
 export const Section = ({
   title,
@@ -9,8 +10,8 @@ export const Section = ({
   onLeaveFeedback,
 }) => {
   return (
-    <div>
-      <h2>{title}</h2>
+    <Container>
+      <Title>{title}</Title>
       {title === 'Please leave feedback' ? (
         <FeedbackOptions
           options={['Good', 'Neutral', 'Bad']}
@@ -23,6 +24,6 @@ export const Section = ({
           countPositiveFeedback={countPositiveFeedback}
         ></Statistics>
       )}
-    </div>
+    </Container>
   );
 };
