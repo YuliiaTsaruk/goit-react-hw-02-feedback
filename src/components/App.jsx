@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { Button } from './FeedbackBtn/FeedbackBtn';
+import { Section } from './Section/Section';
 
 export class App extends Component {
   state = {
@@ -7,26 +7,12 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  updateGood = () => {
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-  };
 
-  updateNeutral = () => {
+  onLeaveFeedback = evt => {
+    const value = evt.target.textContent.toLowerCase();
     this.setState(prevState => {
       return {
-        neutral: prevState.neutral + 1,
-      };
-    });
-  };
-
-  updateBad = () => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
+        [value]: prevState[value] + 1,
       };
     });
   };
@@ -43,28 +29,20 @@ export class App extends Component {
   };
 
   render() {
-    const { good, neutral, bad } = this.state;
+    const total = this.countTotalFeedback();
+    const countPositiveFeedback = this.countPositiveFeedbackPercentage();
     return (
       <div>
-        <h1>Please leave feedback</h1>
-        <div>
-          <Button value={good} onUpdate={this.updateGood} name="Good" />
-          <Button
-            value={neutral}
-            onUpdate={this.updateNeutral}
-            name="Neutral"
-          />
-          <Button value={bad} onUpdate={this.updateBad} name="Bad" />
-        </div>
-
-        <h2>Statistics</h2>
-        <div>
-          <p>Good: {good}</p>
-          <p>Neutral: {neutral}</p>
-          <p>Bad: {bad}</p>
-          <p>Total: {this.countTotalFeedback()}</p>
-          <p>Positive feedback: {this.countPositiveFeedbackPercentage()}%</p>
-        </div>
+        <Section
+          title="Please leave feedback"
+          onLeaveFeedback={this.onLeaveFeedback}
+        ></Section>
+        <Section
+          title="Statistics"
+          state={this.state}
+          total={total}
+          countPositiveFeedback={countPositiveFeedback}
+        ></Section>
       </div>
     );
   }
